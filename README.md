@@ -75,3 +75,12 @@ API across AWS services.
     }
 
     aws.cs.createDomain().then(addDocs);
+
+
+## TODO
+
+ * Finish high level interfaces for existing services
+ * EMR support
+ * STS support
+ * DynamoDB support
+ * Simple Workflow support
