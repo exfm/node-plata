@@ -1,12 +1,12 @@
 {
-  "name": "node-aws",
+  "name": "plata",
   "description": "A client interface to various AWS services.",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/raincloud/node-aws.git"
+    "url": "git://github.com/exfm/node-plata.git"
   },
-  "author": "Jordan Ryan Moore <jordanryanmoore@rainclouddev.com>",
+  "author": "Lucas Hrabovsky <lucas@ex.fm>",
   "main": "index.js",
   "directories": {
     "lib": "lib"
