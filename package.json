@@ -1,0 +1,23 @@
+{
+  "name": "node-aws",
+  "description": "A client interface to various AWS services.",
+  "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/raincloud/node-aws.git"
+  },
+  "author": "Jordan Ryan Moore <jordanryanmoore@rainclouddev.com>",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "dependencies": {
+    "libxmljs": ">= 0.4.0",
+    "when": "1.3.0",
+    "winston": "0.6.1",
+    "whet.extend": "0.9.7"
+  }
+}
