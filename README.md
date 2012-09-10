@@ -1,6 +1,6 @@
-# node-aws
+# Plata
 
-`node-aws` is an easy-to-use AWS client for node that supports a consistent
+Plata is an easy-to-use AWS client for node that supports a consistent
 API across AWS services.
 
 ## Currently Supported Services
