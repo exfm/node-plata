@@ -13,8 +13,8 @@ function AWS(){}
 AWS.prototype.connect = function(opts){
     opts = opts || {};
 
-    var key = process.env.AWS_KEY,
-        secret = process.env.AWS_SECRET,
+    var key = opts.key || process.env.AWS_KEY,
+        secret = opts.secret || process.env.AWS_SECRET,
         data;
 
     if(opts.file){
