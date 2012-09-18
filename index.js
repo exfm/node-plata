@@ -13,6 +13,7 @@ var fs = require('fs'),
 function AWS(){
     AWS.super_.call(this);
     this.setMaxListeners(0);
+    this.connected = false;
 }
 util.inherits(AWS, EventEmitter);
 
@@ -42,7 +43,15 @@ AWS.prototype.connect = function(opts){
     this.cloudSearch = new cloudsearch.CloudSearch(key, secret);
     this.cloudWatch = new CloudWatch(key, secret);
     this.emit('connect');
+    this.connected = true;
     return this;
+};
+
+AWS.prototype.onConnected = function(cb){
+    if(this.connected){
+        return cb.apply(this, []);
+    }
+    this.on('connect', cb);
 };
 
 
