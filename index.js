@@ -5,10 +5,16 @@ var fs = require('fs'),
     s3 = require('./lib/services/s3'),
     ses = require('./lib/services/ses'),
     sqs = require('./lib/services/sqs'),
-    CloudWatch = require('./lib/services/cloud-watch');
+    CloudWatch = require('./lib/services/cloud-watch'),
+    util = require('util'),
+    EventEmitter = require('events').EventEmitter;
 
 
-function AWS(){}
+function AWS(){
+    AWS.super_.call(this);
+    this.setMaxListeners(0);
+}
+util.inherits(AWS, EventEmitter);
 
 AWS.prototype.connect = function(opts){
     opts = opts || {};
@@ -26,13 +32,19 @@ AWS.prototype.connect = function(opts){
     this.accessKeyId = key;
     this.secretAccessKey = secret;
 
-    this.s3 = new s3.S3(key, secret);
+    Object.defineProperty(this, "s3", { get : function(){
+        return new s3.S3(key, secret);
+    }});
+
     this.ses = new ses.SES(key, secret);
     this.sqs = new sqs.SQS(key, secret);
 
     this.cloudSearch = new cloudsearch.CloudSearch(key, secret);
     this.cloudWatch = new CloudWatch(key, secret);
+    this.emit('connect');
     return this;
 };
+
+
 
 module.exports = new AWS();
