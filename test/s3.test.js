@@ -10,7 +10,13 @@ describe("S3", function(){
     });
     describe("key", function(){
         it("should create a new key");
+        it("should be able to do HEAD lookups", function(done){
+            aws.s3.lookup('exfmnodetest', '1.json').then(function(){
+                done();
+            });
+        });
     });
+
 });
 
 // sequence(aws).then(

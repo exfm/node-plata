@@ -6,11 +6,11 @@ var aws = require('../'),
 aws.connect({'file': __dirname + '/auth.json'});
 
 
-aws.cloudsearch.describeDomains().then(
-    function(domains){
-        console.log(domains);
-    },
-    function(err){
-        console.error(err);
-    }
-);
+// aws.cloudsearch.describeDomains().then(
+//     function(domains){
+//         console.log(domains);
+//     },
+//     function(err){
+//         console.error(err);
+//     }
+// );

@@ -18,6 +18,9 @@ function AWS(){
 util.inherits(AWS, EventEmitter);
 
 AWS.prototype.connect = function(opts){
+    if(this.connected){
+        return this;
+    }
     opts = opts || {};
 
     var key = opts.key || process.env.AWS_KEY,
