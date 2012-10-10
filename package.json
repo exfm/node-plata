@@ -15,7 +15,7 @@
     "node": ">= 0.6.0"
   },
   "dependencies": {
-    "libxmljs": ">= 0.4.0",
+    "xmldom": "0.1.13",
     "when": "1.3.0",
     "winston": "0.6.1",
     "whet.extend": "0.9.7"
