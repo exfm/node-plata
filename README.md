@@ -15,8 +15,11 @@ a consistent API across AWS services.
 
 ## TODO
 
+ * Docs for existing services
  * Finish high level interfaces for existing services
- * EMR support
- * STS support
- * DynamoDB support
- * Simple Workflow support
+ * EMR
+ * STS
+ * DynamoDB
+ * Simple Workflow
+ * Cloud Formation
+ * Cloud Front
