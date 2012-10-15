@@ -6,7 +6,7 @@ API across AWS services.
 ## Currently Supported Services
 
  * [S3](node-plata/blob/master/docs/s3.md)
- * CloudSearch
+ * [CloudSearch](node-plata/blob/master/docs/cloud-search.md)
  * CloudWatch
  * SQS
  * SES
