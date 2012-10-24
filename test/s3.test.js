@@ -13,13 +13,11 @@ describe("S3", function(){
         it("should create a new key");
         it("should be able to do HEAD lookups", function(done){
             aws.s3.lookup('exfmnodetest', '1.json').then(function(headers){
-                console.log(headers);
                 done();
             });
         });
         it("should be able to do HEAD lookups for non-existent keys", function(done){
             aws.s3.lookup('exfmnodetest', '2.json').then(function(headers){
-                console.log(headers);
                 done();
             });
         });
