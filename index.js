@@ -10,7 +10,7 @@ var fs = require('fs'),
     log = require('./lib/aws').log,
     util = require('util'),
     EventEmitter = require('events').EventEmitter,
-    winston = require('winston');
+    log = require('./lib/aws').log;
 
 function AWS(){
     AWS.super_.call(this);
@@ -68,3 +68,4 @@ AWS.prototype.setLogLevel = function(level){
 };
 
 module.exports = new AWS();
+module.exports.log = log;
