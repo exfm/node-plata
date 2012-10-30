@@ -5,6 +5,7 @@ var fs = require('fs'),
     s3 = require('./lib/services/s3'),
     ses = require('./lib/services/ses'),
     sqs = require('./lib/services/sqs'),
+    ec2 = require('./lib/services/ec2'),
     CloudWatch = require('./lib/services/cloud-watch'),
     util = require('util'),
     EventEmitter = require('events').EventEmitter;
@@ -38,6 +39,10 @@ AWS.prototype.connect = function(opts){
 
     Object.defineProperty(this, "s3", { get : function(){
         return new s3.S3(key, secret);
+    }});
+
+    Object.defineProperty(this, "ec2", { get : function(){
+        return new ec2.EC2(key, secret);
     }});
 
     this.ses = new ses.SES(key, secret);
