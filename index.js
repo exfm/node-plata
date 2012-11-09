@@ -7,9 +7,10 @@ var fs = require('fs'),
     sqs = require('./lib/services/sqs'),
     ec2 = require('./lib/services/ec2'),
     CloudWatch = require('./lib/services/cloud-watch'),
+    log = require('./lib/aws').log,
     util = require('util'),
-    EventEmitter = require('events').EventEmitter;
-
+    EventEmitter = require('events').EventEmitter,
+    winston = require('winston');
 
 function AWS(){
     AWS.super_.call(this);
@@ -62,6 +63,8 @@ AWS.prototype.onConnected = function(cb){
     this.on('connect', cb);
 };
 
-
+AWS.prototype.setLogLevel = function(level){
+    log.transports.console.level = level;
+};
 
 module.exports = new AWS();
