@@ -10,7 +10,6 @@ describe("S3", function(){
         it("should create a new bucket");
     });
     describe("key", function(){
-        it("should create a new key");
         it("should be able to do HEAD lookups", function(done){
             aws.s3.lookup('exfmnodetest', '1.json').then(function(res){
                 done();
@@ -28,6 +27,19 @@ describe("S3", function(){
                 done(new Error("Should have been rejected."));
             }, function(){
                 done();
+            });
+        });
+        it("should copy a key", function(done){
+            aws.s3.remove('exfmnodetest', '3.json').then(function(res){
+                var headers = {
+                    'x-amz-acl': 'public-read',
+                    'Content-Type': 'application/json'
+                };
+                aws.s3.copy('exfmnodetest', '1.json', 'exfmnodetest', '3.json', headers).then(function(res){
+                    aws.s3.exists('exfmnodetest', '3.json').then(function(res){
+                        done();
+                    }, done);
+                }, done);
             });
         });
     });
