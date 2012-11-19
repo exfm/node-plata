@@ -79,32 +79,81 @@ describe("SQS", function(){
 
     //     }, done);
     // });
-    it('should retry a message', function(done){
+    // it('should retry a message', function(done){
+    //     var name = 'platatest_send',
+    //         queue,
+    //         details;
+
+    //     aws.sqs.createQueue(name)
+    //         .then(function(q){
+    //             queue = q;
+    //             return queue.getDetails();
+    //         }).then(function(d){
+    //             details = d;
+    //             console.log(details);
+    //             return d;
+    //         }).then(function(){
+    //             return queue.put({'task': 'buildSlide'});
+    //         }).then(function(){
+    //             return queue.get(1);
+    //         }).then(function(message){
+    //             return message.retry();
+    //         }).then(function(){
+    //             return queue.getDetails();
+    //         }).then(function(d){
+    //             assert.equal(d.approximateNumberOfMessages,
+    //                 details.approximateNumberOfMessages + 1);
+    //             return queue.remove();
+    //         }).then(function(){
+    //             done();
+    //         });
+    // });
+it('should have a nice event interface for workers', function(done){
         var name = 'platatest_send',
-            details;
+            queue,
+            details,
+            sentMessageId;
 
-        aws.sqs.createQueue(name).then(function(queue){
-            queue.getDetails().then(function(d){
-                details = d;
-                console.log(details);
-                return d;
-            }).then(function(){
-                return queue.put({'task': 'buildSlide'});
-            }).then(function(){
-                return queue.get(1);
-            }).then(function(message){
-                return message.retry();
-            }).then(function(){
-                return queue.getDetails();
-            }).then(function(d){
-                assert.equal(d.approximateNumberOfMessages,
-                    details.approximateNumberOfMessages + 1);
-                return queue.remove();
-            }).then(function(){
-                done();
+        queue = aws.sqs.Queue(name);
+        queue.on('ready', function(stats){
+            // console.log('Queue is ready.  Here are its stats.', stats);
+        });
+
+        queue.on('message', function(message){
+            assert.equal(message.body.task, 'build slide');
+            message.ack();
+        });
+
+        queue.on('ack', function(message){
+            assert.equal(message.id, sentMessageId);
+            done();
+        });
+        queue.listen(100);
+
+        queue.put({'task': 'build slide'})
+            .then(function(messageId){
+                // console.log('Put new message', messageId);
+                sentMessageId = messageId;
             });
-
-        }, done);
     });
+    // it("should send a batch", function(done){
+    //     var name = 'platatest_batch',
+    //         queue,
+    //         messages = [
+    //             {'task': 'build slide'},
+    //             {'task': 'build swingset'},
+    //             {'task': 'build monkeybars'}
+    //         ],
+    //         batch = aws.sqs.batch(name, messages);
 
+    //     aws.sqs.createQueue(name)
+    //         .then(function(q){
+    //             queue = q;
+    //             return q;
+    //         }).then(function(){
+    //             return queue.put({'task': 'buildSlide'});
+    //         }).then(function(){
+    //             done();
+    //         });
+    // });
 });
