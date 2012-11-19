@@ -47,7 +47,11 @@ AWS.prototype.connect = function(opts){
     }});
 
     this.ses = new ses.SES(key, secret);
-    this.sqs = new sqs.SQS(key, secret);
+
+    Object.defineProperty(this, "sqs", { get : function(){
+        return new sqs.SQS(key, secret);
+    }});
+
 
     this.cloudSearch = new cloudsearch.CloudSearch(key, secret);
     this.cloudWatch = new CloudWatch(key, secret);
