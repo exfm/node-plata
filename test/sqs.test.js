@@ -108,61 +108,56 @@ describe("SQS", function(){
     //             done();
     //         });
     // });
-it('should have a nice event interface for workers', function(done){
-        var name = 'platatest_send',
-            queue,
-            details,
-            sentMessageId;
+// it('should have a nice event interface for workers', function(done){
+//         var name = 'platatest_send',
+//             queue,
+//             details,
+//             sentMessageId;
 
-        queue = aws.sqs.Queue(name);
-        queue.on('ready', function(stats){
-            // console.log('Queue is ready.  Here are its stats.', stats);
-        });
+//         queue = aws.sqs.Queue(name);
+//         queue.on('ready', function(stats){
+//             // console.log('Queue is ready.  Here are its stats.', stats);
+//         });
 
-        queue.on('message', function(message){
-            // Stop listening for new messages.
-            // Got for cases like metadata where we don't want more than
-            // one task per core going at a time.
-            queue.close();
+//         queue.on('message', function(message){
+//             // Stop listening for new messages.
+//             // Got for cases like metadata where we don't want more than
+//             // one task per core going at a time.
+//             queue.close();
 
-            assert.equal(message.body.task, 'build slide');
-            message.ack();
+//             assert.equal(message.body.task, 'build slide');
+//             message.ack();
 
-            // Listen for more messages.
-            queue.listen(100);
-        });
+//             // Listen for more messages.
+//             queue.listen(100);
+//         });
 
-        queue.on('ack', function(message){
+//         queue.on('ack', function(message){
 
-            assert.equal(message.id, sentMessageId);
+//             assert.equal(message.id, sentMessageId);
+//             done();
+//         });
+//         queue.listen(100);
+
+//         queue.put({'task': 'build slide'})
+//             .then(function(messageId){
+//                 // console.log('Put new message', messageId);
+//                 sentMessageId = messageId;
+//             });
+//     });
+    it("should send a batch", function(done){
+        var name = 'platatest_batch',
+            queue = aws.sqs.Queue(name),
+            messages = [
+                {'task': 'build slide'},
+                {'task': 'build swingset'},
+                {'task': 'build monkeybars'}
+            ],
+            batch = queue.batch(messages);
+
+        batch.put().then(function(acks){
+            assert.equal(acks.length, 3);
             done();
         });
-        queue.listen(100);
-
-        queue.put({'task': 'build slide'})
-            .then(function(messageId){
-                // console.log('Put new message', messageId);
-                sentMessageId = messageId;
-            });
     });
-    // it("should send a batch", function(done){
-    //     var name = 'platatest_batch',
-    //         queue,
-    //         messages = [
-    //             {'task': 'build slide'},
-    //             {'task': 'build swingset'},
-    //             {'task': 'build monkeybars'}
-    //         ],
-    //         batch = aws.sqs.batch(name, messages);
-
-    //     aws.sqs.createQueue(name)
-    //         .then(function(q){
-    //             queue = q;
-    //             return q;
-    //         }).then(function(){
-    //             return queue.put({'task': 'buildSlide'});
-    //         }).then(function(){
-    //             done();
-    //         });
-    // });
 });
