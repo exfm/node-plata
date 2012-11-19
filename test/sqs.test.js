@@ -120,11 +120,20 @@ it('should have a nice event interface for workers', function(done){
         });
 
         queue.on('message', function(message){
+            // Stop listening for new messages.
+            // Got for cases like metadata where we don't want more than
+            // one task per core going at a time.
+            queue.close();
+
             assert.equal(message.body.task, 'build slide');
             message.ack();
+
+            // Listen for more messages.
+            queue.listen(100);
         });
 
         queue.on('ack', function(message){
+
             assert.equal(message.id, sentMessageId);
             done();
         });
