@@ -45,13 +45,6 @@ describe("S3", function(){
             aws.s3.remove('exfmnodetest', '3.json').then(copyKey, copyKey);
 
         });
-        it('should list more than 1000 keys', function(done){
-            // aws.s3.getKeys('boatyard.extensio.fm',  {'prefix': 'mongo2s3/'}).then(function(res){
-            //     console.log(res);
-            //     done();
-            // });
-            done();
 
-        });
     });
 });
