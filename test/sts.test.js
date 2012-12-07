@@ -1,6 +1,7 @@
 "use strict";
 
 var aws = require('../'),
+    sts = require('../lib/services/sts'),
     assert = require('assert'),
     util = require('util');
 
@@ -19,5 +20,10 @@ describe("STS", function(){
         session.on('ready', function(){
             done();
         });
+    });
+
+    it("should set a proper refresh time", function(){
+        var s = new sts.Session(null, 900);
+        assert(s.refreshTime === 840000);
     });
 });
