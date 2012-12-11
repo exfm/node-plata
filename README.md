@@ -12,14 +12,12 @@ a consistent API across AWS services.
  * SES
  * SNS
  * EC2 (minimal)
+ * STS
+ * DynamoDB
 
 ## TODO
 
- * Docs for existing services
- * Finish high level interfaces for existing services
  * EMR
- * STS
- * DynamoDB
  * Simple Workflow
  * Cloud Formation
  * Cloud Front

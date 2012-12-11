@@ -1,0 +1,9 @@
+<GetMetricStatisticsResponse xmlns="http://monitoring.amazonaws.com/doc/2010-08-01/">
+  <GetMetricStatisticsResult>
+    <Datapoints/>
+    <Label>ConsumedWriteCapacityUnits</Label>
+  </GetMetricStatisticsResult>
+  <ResponseMetadata>
+    <RequestId>65fe596c-4082-11e2-9ffc-855743421946</RequestId>
+  </ResponseMetadata>
+</GetMetricStatisticsResponse>

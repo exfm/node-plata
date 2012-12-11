@@ -5,6 +5,8 @@ var fs = require('fs'),
     s3 = require('./lib/services/s3'),
     ses = require('./lib/services/ses'),
     sqs = require('./lib/services/sqs'),
+    STS = require('./lib/services/sts'),
+    Dynamo = require('./lib/services/dynamo'),
     ec2 = require('./lib/services/ec2'),
     CloudWatch = require('./lib/services/cloud-watch'),
     log = require('./lib/aws').log,
@@ -52,6 +54,11 @@ AWS.prototype.connect = function(opts){
         return new sqs.SQS(key, secret);
     }});
 
+    Object.defineProperty(this, "sts", { get : function(){
+        return new STS(key, secret);
+    }});
+
+    this.dynamo = new Dynamo(key, secret);
 
     this.cloudSearch = new cloudsearch.CloudSearch(key, secret);
     this.cloudWatch = new CloudWatch(key, secret);
