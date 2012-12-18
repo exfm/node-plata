@@ -5,6 +5,7 @@ var fs = require('fs'),
     s3 = require('./lib/services/s3'),
     ses = require('./lib/services/ses'),
     sqs = require('./lib/services/sqs'),
+    SNS = require('./lib/services/sns'),
     STS = require('./lib/services/sts'),
     Dynamo = require('./lib/services/dynamo'),
     ec2 = require('./lib/services/ec2'),
@@ -62,6 +63,8 @@ AWS.prototype.connect = function(opts){
 
     this.cloudSearch = new cloudsearch.CloudSearch(key, secret);
     this.cloudWatch = new CloudWatch(key, secret);
+    this.sns = new SNS(key, secret);
+
     this.emit('connect');
     this.connected = true;
     return this;
