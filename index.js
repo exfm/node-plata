@@ -8,7 +8,7 @@ var fs = require('fs'),
     SNS = require('./lib/services/sns'),
     STS = require('./lib/services/sts'),
     Dynamo = require('./lib/services/dynamo'),
-    ec2 = require('./lib/services/ec2'),
+    EC2 = require('./lib/services/ec2'),
     CloudWatch = require('./lib/services/cloud-watch'),
     log = require('./lib/aws').log,
     util = require('util'),
@@ -45,12 +45,6 @@ AWS.prototype.connect = function(opts){
         return new s3.S3(key, secret);
     }});
 
-    Object.defineProperty(this, "ec2", { get : function(){
-        return new ec2.EC2(key, secret);
-    }});
-
-    this.ses = new ses.SES(key, secret);
-
     Object.defineProperty(this, "sqs", { get : function(){
         return new sqs.SQS(key, secret);
     }});
@@ -58,6 +52,10 @@ AWS.prototype.connect = function(opts){
     Object.defineProperty(this, "sts", { get : function(){
         return new STS(key, secret);
     }});
+
+    this.ec2 = new EC2(key, secret);
+
+    this.ses = new ses.SES(key, secret);
 
     this.dynamo = new Dynamo(key, secret);
 
@@ -83,3 +81,10 @@ AWS.prototype.setLogLevel = function(level){
 
 module.exports = new AWS();
 module.exports.log = log;
+module.exports.S3 = s3.S3;
+module.exports.EC2 = EC2;
+module.exports.SES = ses.SES;
+module.exports.SNS = SNS;
+module.exports.CloudSearch = cloudsearch.CloudSearch;
+module.exports.CloudWatch = CloudWatch;
+module.exports.Dynamo = Dynamo;
