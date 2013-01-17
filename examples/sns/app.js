@@ -24,7 +24,7 @@ topic.on('confirmed', function(notification){
     console.log('You can now send messages.');
 });
 
-// Now let's try and sned a message through SNS
+// Now let's try and send a message through SNS
 // that comes back around and hits us.
 app.post('/send-notification', function(req, res, next){
     topic.publish("Hey buddy", "Optional Subject").then(function(){
