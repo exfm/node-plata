@@ -8,12 +8,15 @@ aws.connect({'file': __dirname + '/auth.json'});
 describe("SQS", function(){
     it("should create a queue", function(done){
         var name = 'platatest';
-        aws.sqs.createQueue(name).then(function(queue){
-            aws.sqs.listQueues().then(function(queues){
+        aws.sqs.createQueue(name).then(function(res){
+            var queue = res.queue;
+            aws.sqs.listQueues().then(function(res){
+                var queues = res.queues;
                 assert.equal(queues.filter(function(q){
                     return q.name === name;
                 })[0].name, name);
-                aws.sqs.getQueue(name).then(function(q){
+                aws.sqs.getQueue(name).then(function(res){
+                    var q = res.queue;
                     q.remove().then(function(res){
                         done();
                     });
@@ -39,7 +42,8 @@ describe("SQS", function(){
     });
     it('should send a message and get it', function(done){
         var name = 'platatest_send';
-        aws.sqs.createQueue(name).then(function(queue){
+        aws.sqs.createQueue(name).then(function(res){
+            var queue = res.queue;
             queue.put({'task': 'buildSlide'}).then(function(res){
                 queue.get(1).then(function(res){
                     queue.remove().then(function(res){
@@ -55,7 +59,9 @@ describe("SQS", function(){
         var name = 'platatest_send2',
             details;
 
-        aws.sqs.createQueue(name).then(function(queue){
+        aws.sqs.createQueue(name).then(function(res){
+            var queue = res.queue;
+
             queue.getDetails().then(function(d){
                 details = d;
                 return d;
@@ -83,8 +89,8 @@ describe("SQS", function(){
             details;
 
         aws.sqs.createQueue(name)
-            .then(function(q){
-                queue = q;
+            .then(function(res){
+                queue = res.queue;
                 return queue.getDetails();
             }).then(function(d){
                 details = d;
