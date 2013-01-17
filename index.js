@@ -44,13 +44,11 @@ AWS.prototype.connect = function(opts){
         return new s3.S3(key, secret);
     }});
 
-    Object.defineProperty(this, "sqs", { get : function(){
-        return new sqs.SQS(key, secret);
-    }});
-
     Object.defineProperty(this, "sts", { get : function(){
         return new STS(key, secret);
     }});
+
+    this.sqs = new sqs.SQS(key, secret);
 
     this.ec2 = new EC2(key, secret);
 
