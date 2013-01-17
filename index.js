@@ -10,7 +10,6 @@ var fs = require('fs'),
     Dynamo = require('./lib/services/dynamo'),
     EC2 = require('./lib/services/ec2'),
     CloudWatch = require('./lib/services/cloud-watch'),
-    log = require('./lib/aws').log,
     util = require('util'),
     EventEmitter = require('events').EventEmitter,
     log = require('./lib/aws').log;

@@ -1,6 +1,6 @@
 "use strict";
 
-var aws = require('../../').connect({key: 'AKIAI353W3QRFTL7XFXQ', secret: 'tNPiiT1PSLANtg7XK6LGai+o2OatsICHpAC5DSFa'}),
+var aws = require('../../').connect({key: '<your key>', secret: '<your secret>'}),
     topic = aws.sns.Topic('beanfactory'),
     app = require('express')(),
     myHost = 'lucas-dev.ex.fm';
