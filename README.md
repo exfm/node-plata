@@ -15,6 +15,11 @@ a consistent API across AWS services.
  * STS
  * DynamoDB
 
+## Libraries That Use Plata
+
+ * [mambo](https://github.com/exfm/node-mambo) - Document Mapper for DynamoDB.
+ * [salsify](https://github.com/exfm/node-salsify) - Simple background job processing with SQS.
+
 ## TODO
 
  * EMR
