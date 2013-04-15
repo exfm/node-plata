@@ -1,7 +1,7 @@
 {
   "name": "plata",
   "description": "A client interface to various AWS services.",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "repository": {
     "type": "git",
     "url": "git://github.com/exfm/node-plata.git"
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "xmldom": "0.1.13",
-    "when": "1.8.0",
+    "q": "0.9.3",
     "winston": "0.6.1",
     "whet.extend": "0.9.7",
     "node-uuid": "1.4.0",
