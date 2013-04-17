@@ -40,13 +40,9 @@ AWS.prototype.connect = function(opts){
     this.accessKeyId = key;
     this.secretAccessKey = secret;
 
-    Object.defineProperty(this, "s3", { get : function(){
-        return new s3.S3(key, secret);
-    }});
+    this.s3 = new s3.S3(key, secret);
 
-    Object.defineProperty(this, "sts", { get : function(){
-        return new STS(key, secret);
-    }});
+    this.sts = new STS(key, secret);
 
     this.sqs = new sqs.SQS(key, secret);
 

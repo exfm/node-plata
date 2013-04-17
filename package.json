@@ -21,5 +21,16 @@
     "whet.extend": "0.9.7",
     "node-uuid": "1.4.0",
     "plog": "0.0.4"
-  }
+  },
+  "keywords": [
+    "amazon",
+    "aws",
+    "dynamodb",
+    "ec2",
+    "s3",
+    "cloudwatch",
+    "ses",
+    "sns",
+    "sqs"
+  ],
 }
